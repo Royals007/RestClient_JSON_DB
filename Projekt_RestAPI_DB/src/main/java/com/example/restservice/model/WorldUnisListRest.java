@@ -1,5 +1,7 @@
+
 package com.example.restservice.model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Generated;
 import javax.persistence.*;
@@ -8,25 +10,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "country",
-        "domains",
-        "web_pages",
-        "alpha_two_code",
-        "name",
-        "state-province"
+    "country",
+    "domains",
+    "web_pages",
+    "alpha_two_code",
+    "name",
+    "state-province"
 })
 
+
 @Generated("jsonschema2pojo")
-@Entity  // to save in DB
-public class WorldUnisListRest {
+@Entity  // to save in DB - Used Entity
 
+public class WorldUnisListRest  { // implements Serializable
 
+// if we use - dont take id in JSON data
     @JsonIgnore
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // mysql :Identity
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -35,12 +40,13 @@ public class WorldUnisListRest {
     @Column
     private String country;
 
-    @Transient  // if we use - dont take id in JSON data
+
+    @Transient
     @JsonProperty("domains")
     @Column
     private List<String> domains = null;
 
-    @Transient  // if we use - dont take id in JSON data
+    @Transient
     @JsonProperty("web_pages")
     @Column
     private List<String> webPages = null;
@@ -52,14 +58,13 @@ public class WorldUnisListRest {
     @JsonProperty("name")
     @Column
     private String name;
-
-    @JsonIgnore
+@Transient
     @JsonProperty("state-province")
     @Column
-    private String stateProvince;
+    private Object stateProvince;
 
 
-    // Getters and Setters
+
     @JsonProperty("country")
     public String getCountry() {
         return country;
@@ -110,11 +115,13 @@ public class WorldUnisListRest {
         this.name = name;
     }
 
-    public String getStateProvince() {
+    @JsonProperty("state-province")
+    public Object getStateProvince() {
         return stateProvince;
     }
 
-    public void setStateProvince(String stateProvince) {
+    @JsonProperty("state-province")
+    public void setStateProvince(Object stateProvince) {
         this.stateProvince = stateProvince;
     }
 

@@ -19,16 +19,7 @@ class UniServiceTest {
     }
 
     @Test
-    void saveWithParam() {
-        service.saveWithParam("germany"); // with specific country call und db Speichern
-    }
-
-    @Test
-    void saveWithOutParam() {
-        //service.saveWithOutParam();
-    }
-
-    @Test
-    void testSaveWithParam() {
+    void save() {
+        service.save("germany");
     }
 }

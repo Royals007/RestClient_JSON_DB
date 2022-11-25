@@ -13,21 +13,20 @@ public class UniService {
     UniDAO uniDAO;
     @Autowired
     RestClient client;
+    public void save(){
 
-    /* without Parameter (all countries) */
-    public void saveWithOutParam() {
-        //client.create("").forEach(u-> uniDAO.save(u) );
+        client.create("").forEach(u-> uniDAO.save(u) );
+        // client.to.. not there bewforere
     }
 
-    /* with parameter (selected Country) */
-    public void saveWithParam(String param) {
+    public void save(String param){
 
-        client.create(param).forEach(u -> uniDAO.save(u));
+        client.create(param).forEach(u-> uniDAO.save(u) );
+        // client.to.. not there bewforere
     }
 
     public static void main(String[] args) {
-        UniService uniService = new UniService();
-        uniService.saveWithParam("germany");
-        //uniService.saveWithOutParam();
+        UniService  uniService = new UniService();
+        uniService.save("");
     }
 }
